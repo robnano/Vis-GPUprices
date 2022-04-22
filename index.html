@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta charset="utf-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/favicon.ico" type="image/x-icon" rel="icon" /> -->
         <!-- import D3 Version 6 here or at the end of the body -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script> -->
+        <script src="https://d3js.org/d3.v4.js"></script>
+
         
         <!-- load our custom D3 code (must happen after D3 is loaded) -->
-        <script src="./gpuline.js"></script>
-        <script src="./cryptoline.js"></script>
-        <script src="./semiline.js"></script>
+        <!-- <script src="./semiline.js"></script> -->
+        <!-- <script src="./gpuline.js"></script> -->
+        
 
 
     </head>
     <body>
         <!-- create an SVG canvas for us to modify -->
+        <div id="my_dataviz"></div>
+
+        <!-- <svg id="semi" width="1200" height="800"></svg>
+
         <svg id="gpu" width="1200" height="800"></svg>
 
-        <svg id="crypto" width="1200" height="800"></svg>   
+        <svg id="crypto" width="1200" height="800"></svg>    -->
 
-        <svg id="semi" width="1200" height="800"></svg>
-
+        <script src="./cryptoline.js"></script>
     </body>
 </html>
