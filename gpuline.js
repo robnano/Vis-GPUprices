@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
-=======
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
+    width = 900 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -17,7 +15,7 @@ var svg = d3.select("#gpu")
 //Read the data
 d3.csv("gpu.csv",
   function(d){
-    return { date : d3.timeParse("%d/%m/%Y")(d.date), price : d.price, gpuName: d.gpuName }
+    return { date : d3.timeParse("%m/%d/%Y")(d.date), price : d.price, gpuName: d.gpuName }
   },
   function(data) {
 
@@ -54,7 +52,7 @@ d3.csv("gpu.csv",
 
     // Add Y axis
     var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.price; })])
+      .domain([500, d3.max(data, function(d) { return +d.price; })])
       .range([ height, 0 ]);
     svg.append("g")
       .call(d3.axisLeft(y));
@@ -196,5 +194,3 @@ d3.csv("gpu.csv",
 //         })
 
 // })
-
->>>>>>> Stashed changes
