@@ -1,9 +1,9 @@
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 700 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {top: 100, right: 100, bottom: 100, left: 60},
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#semi")
+var svg1 = d3.select("#semi")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -11,6 +11,7 @@ var svg = d3.select("#semi")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+                   
 //Read the data
 d3.csv("Semiconductors.csv",
 
@@ -26,7 +27,7 @@ d3.csv("Semiconductors.csv",
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, width ]);
-    svg.append("g")
+    svg1.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
@@ -34,11 +35,11 @@ d3.csv("Semiconductors.csv",
     var y = d3.scaleLinear()
       .domain([100, d3.max(data, function(d) { return +d.value; })])
       .range([ height, 0 ]);
-    svg.append("g")
+    svg1.append("g")
       .call(d3.axisLeft(y));
 
     // Add the line
-    svg.append("path")
+    svg1.append("path")
       .datum(data)
       .attr("fill", "none")
       .attr("stroke", "steelblue")

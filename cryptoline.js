@@ -1,8 +1,8 @@
 // append the svg object to the body of the page
 var margin = {top: 10, right: 30, bottom: 30, left: 60}
-var width = 700 - margin.left - margin.right;
-var  height = 500 - margin.top - margin.bottom;
-var svg = d3.select("#crypto")
+var width = 400 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
+var svg2 = d3.select("#crypto")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -28,7 +28,7 @@ d3.csv("Bitcoin.csv",
   var x = d3.scaleTime()
     .domain(d3.extent(data, function(d) { return d.date; }))
     .range([ 0, width ]);
-  xAxis = svg.append("g")
+  xAxis = svg2.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
@@ -36,11 +36,11 @@ d3.csv("Bitcoin.csv",
   var y = d3.scaleLinear()
     .domain([0, d3.max(data, function(d) { return +d.value; })])
     .range([ height, 0 ]);
-  yAxis = svg.append("g")
+  yAxis = svg2.append("g")
     .call(d3.axisLeft(y));
 
   // Add a clipPath: everything out of this area won't be drawn.
-  var clip = svg.append("defs").append("svg:clipPath")
+  var clip = svg2.append("defs").append("svg:clipPath")
       .attr("id", "clip")
       .append("svg:rect")
       .attr("width", width )
@@ -54,7 +54,7 @@ d3.csv("Bitcoin.csv",
       .on("end", updateChart)               // Each time the brush selection changes, trigger the 'updateChart' function
 
   // Create the line variable: where both the line and the brush take place
-  var line = svg.append('g')
+  var line = svg2.append('g')
     .attr("clip-path", "url(#clip)")
 
   // Add the line
