@@ -1,10 +1,10 @@
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+var margin = {top: 100, right: 100, bottom: 100, left: 60},
+    width = 1000 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
+var svg1 = d3.select("#semi")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -13,28 +13,37 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_IC.csv",function(data) {
+d3.csv("Semiconductors.csv",
 
+function(d) {
+  return {date : d3.timeParse("%Y-%m-%d")(d.DATE), value : d.IPB53122S }
+},
+
+function(data){
   // Add X axis --> it is a date format
   var x = d3.scaleLinear()
-    .domain([1,100])
+    .domain(d3.extent(data, function(d) { return d.date; }))
     .range([ 0, width ]);
-  svg.append("g")
+  svg1.append("g")
+    //.attr("stroke", "steelblue")
+    //.attr("class", "axisRed")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0, 13])
+    .domain([[100, d3.max(data, function(d) { return +d.value; })]])
     .range([ height, 0 ]);
-  svg.append("g")
+  svg1.append("g")
+  //.attr("stroke", "steelblue")
+  //.attr("class", "axisRed")
     .call(d3.axisLeft(y));
 
   // This allows to find the closest X index of the mouse:
   var bisect = d3.bisector(function(d) { return d.x; }).left;
 
   // Create the circle that travels along the curve of chart
-  var focus = svg
+  var focus = svg1
     .append('g')
     .append('circle')
       .style("fill", "none")
@@ -43,7 +52,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .style("opacity", 0)
 
   // Create the text that travels along the curve of chart
-  var focusText = svg
+  var focusText = svg1
     .append('g')
     .append('text')
       .style("opacity", 0)
@@ -51,19 +60,19 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .attr("alignment-baseline", "middle")
 
   // Add the line
-  svg
+  svg1
     .append("path")
     .datum(data)
     .attr("fill", "none")
     .attr("stroke", "steelblue")
     .attr("stroke-width", 1.5)
     .attr("d", d3.line()
-      .x(function(d) { return x(d.x) })
-      .y(function(d) { return y(d.y) })
+      .x(function(d) { return x(d.date) })
+      .y(function(d) { return y(d.value) })
       )
 
   // Create a rect on top of the svg area: this rectangle recovers mouse position
-  svg
+  svg1
     .append('rect')
     .style("fill", "none")
     .style("pointer-events", "all")
@@ -89,9 +98,9 @@ d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/da
       .attr("cx", x(selectedData.x))
       .attr("cy", y(selectedData.y))
     focusText
-      .html("x:" + selectedData.x + "  -  " + "y:" + selectedData.y)
-      .attr("x", x(selectedData.x)+15)
-      .attr("y", y(selectedData.y))
+      .html("Date:" + selectedData.date + "  -  " + "Amount:" + selectedData.value)
+      .attr("date", x(selectedData.date)+15)
+      .attr("Amount", y(selectedData.value))
     }
   function mouseout() {
     focus.style("opacity", 0)
