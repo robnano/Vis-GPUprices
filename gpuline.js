@@ -45,12 +45,7 @@ d3.csv("gpu.csv",
       .attr("stroke", "steelblue")
       .attr("class", "axisRed")
       .call(d3.axisBottom(x));
-    // var x = d3.scaleLinear()
-    //   .domain(d3.extent(data, function(d) { return d.year; }))
-    //   .range([ 0, width ]);
-    // svg.append("g")
-    //   .attr("transform", "translate(0," + height + ")")
-    //   .call(d3.axisBottom(x).ticks(7));
+
 
     // Add Y axis
     var y = d3.scaleLinear()
