@@ -1,6 +1,6 @@
 // append the svg object to the body of the page
 var margin = {top: 10, right: 30, bottom: 30, left: 60}
-var width = 400 - margin.left - margin.right;
+var width = 800 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 var svg2 = d3.select("#crypto")
   .append("svg")
@@ -30,6 +30,8 @@ d3.csv("Bitcoin.csv",
     .range([ 0, width ]);
   xAxis = svg2.append("g")
     .attr("transform", "translate(0," + height + ")")
+    .attr("stroke", "steelblue")
+    .attr("class", "axisRed")
     .call(d3.axisBottom(x));
 
   // Add Y axis
@@ -37,6 +39,8 @@ d3.csv("Bitcoin.csv",
     .domain([0, d3.max(data, function(d) { return +d.value; })])
     .range([ height, 0 ]);
   yAxis = svg2.append("g")
+    .attr("stroke", "steelblue")
+    .attr("class", "axisRed")
     .call(d3.axisLeft(y));
 
   // Add a clipPath: everything out of this area won't be drawn.
@@ -107,7 +111,7 @@ d3.csv("Bitcoin.csv",
   }
 
   // If user double click, reinitialize the chart
-  svg.on("dblclick",function(){
+  svg2.on("dblclick",function(){
     x.domain(d3.extent(data, function(d) { return d.date; }))
     xAxis.transition().call(d3.axisBottom(x))
     line

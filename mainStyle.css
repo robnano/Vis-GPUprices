@@ -1,0 +1,47 @@
+a {
+    background-color: red;
+    box-shadow: 0 5px 0 darkred;
+    color: white;
+    padding: 1em 1.5em;
+    margin: 30px;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-left: 30%;
+  }
+
+  .header{
+    margin-top: 50px;
+    margin-left:30%;
+  }
+
+  p{
+      color:white;
+  }
+
+  h2{
+      color:white; 
+  }
+  
+  a:hover {
+    background-color: #ce0606;
+  }
+  
+  a:active {
+    box-shadow: none;
+    top: 5px;
+  }
+
+  img{
+    width: 600px;
+    height: 600px;
+  }
+  
+  body{
+      background-color: black;
+  }
+  .image{
+      margin-top: 50px;
+      margin-left: 300px;
+  }

@@ -1,6 +1,6 @@
 var margin = {top: 100, right: 100, bottom: 100, left: 60},
-    width = 800 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 1000 - margin.left - margin.right,
+    height = 700 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg1 = d3.select("#semi")
@@ -28,6 +28,8 @@ d3.csv("Semiconductors.csv",
       .domain(d3.extent(data, function(d) { return d.date; }))
       .range([ 0, width ]);
     svg1.append("g")
+    .attr("stroke", "steelblue")
+      .attr("class", "axisRed")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
@@ -36,6 +38,8 @@ d3.csv("Semiconductors.csv",
       .domain([100, d3.max(data, function(d) { return +d.value; })])
       .range([ height, 0 ]);
     svg1.append("g")
+    .attr("stroke", "steelblue")
+      .attr("class", "axisRed")
       .call(d3.axisLeft(y));
 
     // Add the line

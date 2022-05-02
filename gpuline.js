@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 430 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#gpu")
@@ -42,7 +42,9 @@ d3.csv("gpu.csv",
       .range([ 0, width ]);
       svg.append("g")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).ticks(3));
+      .attr("stroke", "steelblue")
+      .attr("class", "axisRed")
+      .call(d3.axisBottom(x));
     // var x = d3.scaleLinear()
     //   .domain(d3.extent(data, function(d) { return d.year; }))
     //   .range([ 0, width ]);
@@ -55,6 +57,8 @@ d3.csv("gpu.csv",
       .domain([500, d3.max(data, function(d) { return +d.price; })])
       .range([ height, 0 ]);
     svg.append("g")
+      .attr("stroke", "steelblue")
+      .attr("class", "axisRed")
       .call(d3.axisLeft(y));
 
     // Initialize line with first group of the list
